@@ -1,1 +1,2 @@
-# OOP_Group5
+OOP Group 5
+This repository will contain all files needed for our game project
