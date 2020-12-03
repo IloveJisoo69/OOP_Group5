@@ -1,4 +1,3 @@
-
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.Insets;
@@ -17,7 +16,7 @@ import javax.swing.event.ChangeListener;
  * @author liams
  */
 public class GUI extends javax.swing.JFrame implements ActionListener {
-    
+    Menu menu = new Menu();
     /**
      * Creates new form NewJFrame
      */
@@ -142,6 +141,11 @@ public class GUI extends javax.swing.JFrame implements ActionListener {
         jMenu3.add(openFile);
 
         saveFile.setText("Save");
+        saveFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveFileActionPerformed(evt);
+            }
+        });
         jMenu3.add(saveFile);
 
         exit.setText("Exit");
@@ -197,12 +201,16 @@ public class GUI extends javax.swing.JFrame implements ActionListener {
     }// </editor-fold>//GEN-END:initComponents
 
     private void openFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openFileActionPerformed
-        // TODO add your handling code here:
+        menu.openItem(jTextArea1);
     }//GEN-LAST:event_openFileActionPerformed
-
+     
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         System.exit(0);
     }//GEN-LAST:event_exitActionPerformed
+
+    private void saveFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveFileActionPerformed
+        menu.saveItem(jTextArea1);
+    }//GEN-LAST:event_saveFileActionPerformed
 
     /**
      * @param args the command line arguments
