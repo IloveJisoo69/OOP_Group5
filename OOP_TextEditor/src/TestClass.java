@@ -1,6 +1,6 @@
 public class TestClass{
 
     public static void main(String args[]){
-        new TextEditor();
+        new GUI().setVisible(true);
     }
 }
