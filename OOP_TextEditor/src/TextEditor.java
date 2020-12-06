@@ -1,108 +1,288 @@
-import java.awt.*;
+import java.awt.Font;
+import java.awt.GraphicsEnvironment;
+import java.awt.Insets;
 import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.event.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
-public class TextEditor extends JFrame implements ActionListener{
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
-    JTextArea textArea;
-    JScrollPane scrollPane;
-    JLabel fontLabel;
-    JSpinner fontSizeSpinner;
-    JButton fontColorButton;
-    JComboBox fontBox;
-
-    JMenuBar menuBar;
-    JMenu fileMenu;
-    JMenuItem openItem;
-    JMenuItem saveItem;
-    JMenuItem exitItem;
-
-    TextEditor(){
-     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-     this.setTitle("Group 5: Text Editor");
-     this.setSize(500, 500);
-     this.setLayout(new FlowLayout());
-     this.setLocationRelativeTo(null);
-
-     textArea = new JTextArea();
-     textArea.setLineWrap(true);
-     textArea.setWrapStyleWord(true);
-     textArea.setFont(new Font("Arial",Font.PLAIN,20));
-
-     scrollPane = new JScrollPane(textArea);
-     scrollPane.setPreferredSize(new Dimension(450,450));
-     scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-
-     fontLabel = new JLabel("Font: ");
-
-     fontSizeSpinner = new JSpinner();
-     fontSizeSpinner.setPreferredSize(new Dimension(50,25));
-     fontSizeSpinner.setValue(20);
-     fontSizeSpinner.addChangeListener(new ChangeListener() {
-
-      @Override
-      public void stateChanged(ChangeEvent e) {
-
-       textArea.setFont(new Font(textArea.getFont().getFamily(),Font.PLAIN,(int) fontSizeSpinner.getValue())); 
-      }
-
-     });
-
-     fontColorButton = new JButton("Color");
-     fontColorButton.addActionListener(this);
-
-     String[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
-
-     fontBox = new JComboBox(fonts);
-     fontBox.addActionListener(this);
-     fontBox.setSelectedItem("Arial");
-
-     // ------ menubar ------
-
-      menuBar = new JMenuBar();
-      fileMenu = new JMenu("File");
-      openItem = new JMenuItem("Open");
-      saveItem = new JMenuItem("Save");
-      exitItem = new JMenuItem("Exit");
-
-      openItem.addActionListener(this);
-      saveItem.addActionListener(this);
-      exitItem.addActionListener(this);
-
-      fileMenu.add(openItem);
-      fileMenu.add(saveItem);
-      fileMenu.add(exitItem);
-      menuBar.add(fileMenu);
-
-     // ------ /menubar ------
-
-     this.setJMenuBar(menuBar);
-     this.add(fontLabel);
-     this.add(fontSizeSpinner);
-     this.add(fontColorButton);
-     this.add(fontBox);
-     this.add(scrollPane);
-     this.setVisible(true);
+/**
+ *
+ * @author liams
+ */
+public class TextEditor extends javax.swing.JFrame implements ActionListener {
+    Menu menu = new Menu();
+    /**
+     * Creates new form NewJFrame
+     */
+    public TextEditor() {
+        initComponents();
+        
+        this.setTitle("Group 5: Text Editor");
+        jTextArea1.setLineWrap(true);
+        jTextArea1.setWrapStyleWord(true);
+        jTextArea1.setMargin(new Insets(10,10,10,10));
+        
+        String[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(fonts));
+        jComboBox2.addActionListener(this);
+        jComboBox2.setSelectedItem("Times New Roman");
+        
+        
+        jSpinner1.setValue(16);
+        jSpinner1.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                jTextArea1.setFont(new java.awt.Font(jTextArea1.getFont().getFamily(),Font.PLAIN,(int) jSpinner1.getValue())); 
+            }
+        });
+        
+        jTextArea1.setFont(new java.awt.Font((String) jComboBox2.getSelectedItem(),Font.PLAIN,(int) jSpinner1.getValue()));
+        
+        
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent e) {
-
-        if(e.getSource()==fontColorButton) {
-            JColorChooser colorChooser = new JColorChooser();
-
-            Color color = colorChooser.showDialog(null, "Choose a color", Color.black);
-
-            textArea.setForeground(color);
+        if (e.getSource() == jComboBox2) {
+            jTextArea1.setFont(new java.awt.Font((String) jComboBox2.getSelectedItem(),Font.PLAIN,(int) jSpinner1.getValue()));
         }
-
-        if(e.getSource()==fontBox) {
-            textArea.setFont(new Font((String)fontBox.getSelectedItem(),Font.PLAIN,textArea.getFont().getSize()));
-        }
-
-        if(e.getSource()==exitItem) {
-            System.exit(0);
-        }  
     }
+    
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jPopupMenu2 = new javax.swing.JPopupMenu();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuBar3 = new javax.swing.JMenuBar();
+        jMenu5 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JSeparator();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jSpinner1 = new javax.swing.JSpinner();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jButton1 = new javax.swing.JButton();
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu3 = new javax.swing.JMenu();
+        openFile = new javax.swing.JMenuItem();
+        saveFile = new javax.swing.JMenuItem();
+        exit = new javax.swing.JMenuItem();
+
+        jMenuItem2.setText("jMenuItem2");
+
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
+        jMenu5.setText("File");
+        jMenuBar3.add(jMenu5);
+
+        jMenu6.setText("Edit");
+        jMenuBar3.add(jMenu6);
+
+        jMenuItem1.setText("jMenuItem1");
+
+        jMenuItem3.setText("jMenuItem3");
+
+        jCheckBox1.setText("jCheckBox1");
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jComboBox2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel1.setText("Font size: ");
+
+        jSpinner1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel2.setText("Font:");
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jButton1.setText("Color");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jMenuBar2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jMenuBar2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+
+        jMenu3.setBackground(new java.awt.Color(255, 255, 255));
+        jMenu3.setText("File");
+        jMenu3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        openFile.setText("Open");
+        openFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openFileActionPerformed(evt);
+            }
+        });
+        jMenu3.add(openFile);
+
+        saveFile.setText("Save");
+        saveFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveFileActionPerformed(evt);
+            }
+        });
+        jMenu3.add(saveFile);
+
+        exit.setText("Exit");
+        exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitActionPerformed(evt);
+            }
+        });
+        jMenu3.add(exit);
+
+        jMenuBar2.add(jMenu3);
+
+        setJMenuBar(jMenuBar2);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 206, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(32, 32, 32))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 16, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void openFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openFileActionPerformed
+        menu.openItem(jTextArea1);
+    }//GEN-LAST:event_openFileActionPerformed
+     
+    private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_exitActionPerformed
+
+    private void saveFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveFileActionPerformed
+        menu.saveItem(jTextArea1);
+    }//GEN-LAST:event_saveFileActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        menu.chooseFontColor(jTextArea1, jButton1);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(TextEditor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(TextEditor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(TextEditor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(TextEditor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new TextEditor().setVisible(true);
+            }
+        });
+    }
+    
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem exit;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuBar jMenuBar3;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JPopupMenu jPopupMenu2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JMenuItem openFile;
+    private javax.swing.JMenuItem saveFile;
+    // End of variables declaration//GEN-END:variables
 }

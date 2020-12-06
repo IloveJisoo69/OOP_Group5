@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.io.*;
 import java.util.*;
 import javax.swing.*;
@@ -59,5 +60,13 @@ public class Menu {
                 fileOut.close();
             }   
         }
+    }
+    
+    public void chooseFontColor(javax.swing.JTextArea textArea, javax.swing.JButton fontColorButton){
+        JColorChooser colorChooser = new JColorChooser();
+
+        Color color = colorChooser.showDialog(null, "Choose a color", Color.black);
+
+        textArea.setForeground(color);
     }
 }
