@@ -1,9 +1,17 @@
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.Insets;
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.Scanner;
+import javax.swing.JColorChooser;
+import javax.swing.JFileChooser;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -15,8 +23,7 @@ import javax.swing.event.ChangeListener;
  *
  * @author liams
  */
-public class TextEditor extends javax.swing.JFrame implements ActionListener {
-    Menu menu = new Menu();
+public class TextEditor extends javax.swing.JFrame implements ActionListener,Menu {
     /**
      * Creates new form NewJFrame
      */
@@ -203,21 +210,87 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    public void openItem(javax.swing.JTextArea textArea){
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setCurrentDirectory(new File("."));
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Text files", "txt");
+        fileChooser.setFileFilter(filter);
 
+        int response = fileChooser.showOpenDialog(null);
+
+        if(response == JFileChooser.APPROVE_OPTION) {
+            File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
+            Scanner fileIn = null;
+
+            try {
+                fileIn = new Scanner(file);
+                if(file.isFile()) {
+                    while(fileIn.hasNextLine()) {
+                        String line = fileIn.nextLine()+"\n";
+                        textArea.append(line);
+                    }
+                }
+            } catch (FileNotFoundException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+            finally {
+                fileIn.close();
+            }
+        }
+    }
+    
+    public void saveItem(javax.swing.JTextArea textArea){
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setCurrentDirectory(new File("."));
+        int response = fileChooser.showSaveDialog(null);
+
+        if(response == JFileChooser.APPROVE_OPTION) {
+            File file;
+            PrintWriter fileOut = null;
+
+            file = new File(fileChooser.getSelectedFile().getAbsolutePath());
+            try {
+                fileOut = new PrintWriter(file+".txt");
+                fileOut.println(textArea.getText());
+            } 
+            catch (FileNotFoundException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+            finally {
+                fileOut.close();
+            }   
+        }
+    }
+    
+    public void exitItem(){
+        System.exit(0);
+    }
+    
+    public void chooseFontColor(javax.swing.JTextArea textArea, javax.swing.JButton fontColorButton){
+        JColorChooser colorChooser = new JColorChooser();
+
+        Color color = colorChooser.showDialog(null, "Choose a color", Color.black);
+
+        textArea.setForeground(color);
+    }
+    
     private void openFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openFileActionPerformed
-        menu.openItem(jTextArea1);
+        openItem(jTextArea1);
     }//GEN-LAST:event_openFileActionPerformed
      
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
-        System.exit(0);
+        exitItem();
     }//GEN-LAST:event_exitActionPerformed
 
     private void saveFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveFileActionPerformed
-        menu.saveItem(jTextArea1);
+        saveItem(jTextArea1);
     }//GEN-LAST:event_saveFileActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        menu.chooseFontColor(jTextArea1, jButton1);
+        chooseFontColor(jTextArea1, jButton1);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
