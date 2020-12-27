@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import javax.swing.Action;
 import javax.swing.JColorChooser;
 import javax.swing.JFileChooser;
 import javax.swing.event.ChangeEvent;
@@ -29,35 +30,70 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
      */
     public TextEditor() {
         initComponents();
-        
+             
         this.setTitle("Group 5: Text Editor");
         jTextPane1.setMargin(new Insets(10,10,10,10));
         
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>());
+        jComboBox1.setEditable(true);
+        jComboBox1.addItem(6);
+        jComboBox1.addItem(7);
+        jComboBox1.addItem(8);
+        jComboBox1.addItem(9);
+        jComboBox1.addItem(10);
+        jComboBox1.addItem(10.5);
+        jComboBox1.addItem(11);
+        jComboBox1.addItem(12);
+        jComboBox1.addItem(13);
+        jComboBox1.addItem(14);
+        jComboBox1.addItem(15);
+        jComboBox1.addItem(16);
+        jComboBox1.addItem(18);
+        jComboBox1.addItem(20);
+        jComboBox1.addItem(22);
+        jComboBox1.addItem(24);
+        jComboBox1.addItem(26);
+        jComboBox1.addItem(28);
+        jComboBox1.addItem(32);
+        jComboBox1.addItem(36);
+        jComboBox1.addItem(40);
+        jComboBox1.addItem(44);
+        jComboBox1.addItem(48);
+        jComboBox1.addItem(54);
+        jComboBox1.addItem(60);
+        jComboBox1.addItem(66);
+        jComboBox1.addItem(72);
+        
         String[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(fonts));
-        jComboBox2.addActionListener(this);
         jComboBox2.setSelectedItem("Times New Roman");
-        
-        
-        jSpinner1.setValue(16);
-        jSpinner1.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                jTextPane1.setFont(new java.awt.Font(jTextPane1.getFont().getFamily(),Font.PLAIN,(int) jSpinner1.getValue())); 
-            }
-        });
-        
-        jTextPane1.setFont(new java.awt.Font((String) jComboBox2.getSelectedItem(),Font.PLAIN,(int) jSpinner1.getValue()));
-        
-        
+     
+        jComboBox1.addActionListener(this);
+        jComboBox2.addActionListener(this);  
+    }
+    
+    public javax.swing.JComboBox getComboBox1() {
+        return jComboBox1;
+    }
+    
+    public javax.swing.JComboBox getComboBox2() {
+        return jComboBox2;
+    }
+    
+    public javax.swing.JTextPane getTextPane() {
+        return jTextPane1;
     }
     
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == jComboBox2) {
-            jTextPane1.setFont(new java.awt.Font((String) jComboBox2.getSelectedItem(),Font.PLAIN,(int) jSpinner1.getValue()));
+    public void actionPerformed(ActionEvent evt) {
+        Action font = new FontAndSizeAction();
+        if (evt.getSource().equals(jComboBox1)) {
+            font.actionPerformed(evt);
+        } else if (evt.getSource().equals(jComboBox2)) {
+            font.actionPerformed(evt);
         }
     }
+    
     @Override
     public void openItem(javax.swing.JTextPane textArea){
         JFileChooser fileChooser = new JFileChooser();
@@ -82,6 +118,7 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
             }
         }
     }
+    
     @Override
     public void saveItem(javax.swing.JTextPane textArea){
         JFileChooser fileChooser = new JFileChooser();
@@ -106,10 +143,12 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
             }   
         }
     }
+    
     @Override
     public void exitItem(){
         System.exit(0);
     }
+    
     @Override
     public void chooseFontColor(javax.swing.JTextPane textArea, javax.swing.JButton fontColorButton){
         JColorChooser colorChooser = new JColorChooser();
@@ -142,11 +181,14 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
         jCheckBox1 = new javax.swing.JCheckBox();
         jComboBox2 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox();
+        jButton4 = new javax.swing.JButton();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         openFile = new javax.swing.JMenuItem();
@@ -181,8 +223,6 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel1.setText("Font size: ");
 
-        jSpinner1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel2.setText("Font:");
 
@@ -194,6 +234,29 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
         });
 
         jScrollPane1.setViewportView(jTextPane1);
+
+        jButton2.setText("Bold");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Italicize");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jButton4.setText("FontChange");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jMenuBar2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jMenuBar2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -237,27 +300,37 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
             .addGroup(layout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(3, 3, 3)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 206, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addGap(32, 32, 32))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton4)
+                .addContainerGap(82, Short.MAX_VALUE))
             .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 16, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jButton1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1)
+                        .addComponent(jLabel2)
+                        .addComponent(jButton1)
+                        .addComponent(jButton2)
+                        .addComponent(jButton3)
+                        .addComponent(jButton4))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -280,6 +353,21 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         chooseFontColor(jTextPane1, jButton1);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Action boldAction = new BoldAction();
+        boldAction.actionPerformed(evt);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        Action italicAction = new ItalicAction();
+        italicAction.actionPerformed(evt);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        Action font = new FontAndSizeAction();
+        font.actionPerformed(evt);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -322,7 +410,11 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem exit;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -341,7 +433,6 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
     private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JMenuItem openFile;
     private javax.swing.JMenuItem saveFile;
