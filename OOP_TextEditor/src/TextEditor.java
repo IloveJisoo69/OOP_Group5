@@ -4,9 +4,9 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Insets;
 import java.awt.event.*;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.Scanner;
 import javax.swing.JColorChooser;
 import javax.swing.JFileChooser;
 import javax.swing.event.ChangeEvent;
@@ -31,9 +31,7 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
         initComponents();
         
         this.setTitle("Group 5: Text Editor");
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setWrapStyleWord(true);
-        jTextArea1.setMargin(new Insets(10,10,10,10));
+        jTextPane1.setMargin(new Insets(10,10,10,10));
         
         String[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(fonts));
@@ -45,11 +43,11 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
         jSpinner1.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                jTextArea1.setFont(new java.awt.Font(jTextArea1.getFont().getFamily(),Font.PLAIN,(int) jSpinner1.getValue())); 
+                jTextPane1.setFont(new java.awt.Font(jTextPane1.getFont().getFamily(),Font.PLAIN,(int) jSpinner1.getValue())); 
             }
         });
         
-        jTextArea1.setFont(new java.awt.Font((String) jComboBox2.getSelectedItem(),Font.PLAIN,(int) jSpinner1.getValue()));
+        jTextPane1.setFont(new java.awt.Font((String) jComboBox2.getSelectedItem(),Font.PLAIN,(int) jSpinner1.getValue()));
         
         
     }
@@ -57,10 +55,69 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == jComboBox2) {
-            jTextArea1.setFont(new java.awt.Font((String) jComboBox2.getSelectedItem(),Font.PLAIN,(int) jSpinner1.getValue()));
+            jTextPane1.setFont(new java.awt.Font((String) jComboBox2.getSelectedItem(),Font.PLAIN,(int) jSpinner1.getValue()));
         }
     }
-    
+    @Override
+    public void openItem(javax.swing.JTextPane textArea){
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setCurrentDirectory(new File("."));
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Text files", "txt");
+        fileChooser.setFileFilter(filter);
+        
+        int response = fileChooser.showOpenDialog(null);
+
+        if(response == JFileChooser.APPROVE_OPTION) {
+            File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
+
+            try {
+                FileReader fr = new FileReader(file);
+                while(fr.read() != -1){
+                    textArea.read(fr, null);
+                }
+                fr.close();
+            } catch (Exception e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+        }
+    }
+    @Override
+    public void saveItem(javax.swing.JTextPane textArea){
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setCurrentDirectory(new File("."));
+        int response = fileChooser.showSaveDialog(null);
+
+        if(response == JFileChooser.APPROVE_OPTION) {
+            File file;
+            PrintWriter fileOut = null;
+
+            file = new File(fileChooser.getSelectedFile().getAbsolutePath());
+            try {
+                fileOut = new PrintWriter(file);
+                fileOut.println(textArea.getText());
+            } 
+            catch (FileNotFoundException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+            finally {
+                fileOut.close();
+            }   
+        }
+    }
+    @Override
+    public void exitItem(){
+        System.exit(0);
+    }
+    @Override
+    public void chooseFontColor(javax.swing.JTextPane textArea, javax.swing.JButton fontColorButton){
+        JColorChooser colorChooser = new JColorChooser();
+
+        Color color = colorChooser.showDialog(null, "Choose a color", Color.black);
+
+        textArea.setForeground(color);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -87,9 +144,9 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
         jLabel1 = new javax.swing.JLabel();
         jSpinner1 = new javax.swing.JSpinner();
         jLabel2 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextPane1 = new javax.swing.JTextPane();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         openFile = new javax.swing.JMenuItem();
@@ -129,16 +186,14 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel2.setText("Font:");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
         jButton1.setText("Color");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        jScrollPane1.setViewportView(jTextPane1);
 
         jMenuBar2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jMenuBar2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -191,7 +246,7 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 206, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(32, 32, 32))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,81 +259,14 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
                     .addComponent(jLabel2)
                     .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    public void openItem(javax.swing.JTextArea textArea){
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setCurrentDirectory(new File("."));
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Text files", "txt");
-        fileChooser.setFileFilter(filter);
-
-        int response = fileChooser.showOpenDialog(null);
-
-        if(response == JFileChooser.APPROVE_OPTION) {
-            File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
-            Scanner fileIn = null;
-
-            try {
-                fileIn = new Scanner(file);
-                if(file.isFile()) {
-                    while(fileIn.hasNextLine()) {
-                        String line = fileIn.nextLine()+"\n";
-                        textArea.append(line);
-                    }
-                }
-            } catch (FileNotFoundException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
-            finally {
-                fileIn.close();
-            }
-        }
-    }
-    
-    public void saveItem(javax.swing.JTextArea textArea){
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setCurrentDirectory(new File("."));
-        int response = fileChooser.showSaveDialog(null);
-
-        if(response == JFileChooser.APPROVE_OPTION) {
-            File file;
-            PrintWriter fileOut = null;
-
-            file = new File(fileChooser.getSelectedFile().getAbsolutePath());
-            try {
-                fileOut = new PrintWriter(file+".txt");
-                fileOut.println(textArea.getText());
-            } 
-            catch (FileNotFoundException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
-            finally {
-                fileOut.close();
-            }   
-        }
-    }
-    
-    public void exitItem(){
-        System.exit(0);
-    }
-    
-    public void chooseFontColor(javax.swing.JTextArea textArea, javax.swing.JButton fontColorButton){
-        JColorChooser colorChooser = new JColorChooser();
-
-        Color color = colorChooser.showDialog(null, "Choose a color", Color.black);
-
-        textArea.setForeground(color);
-    }
-    
+   
     private void openFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openFileActionPerformed
-        openItem(jTextArea1);
+        openItem(jTextPane1);
     }//GEN-LAST:event_openFileActionPerformed
      
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
@@ -286,11 +274,11 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
     }//GEN-LAST:event_exitActionPerformed
 
     private void saveFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveFileActionPerformed
-        saveItem(jTextArea1);
+        saveItem(jTextPane1);
     }//GEN-LAST:event_saveFileActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        chooseFontColor(jTextArea1, jButton1);
+        chooseFontColor(jTextPane1, jButton1);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -354,7 +342,7 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextPane jTextPane1;
     private javax.swing.JMenuItem openFile;
     private javax.swing.JMenuItem saveFile;
     // End of variables declaration//GEN-END:variables
