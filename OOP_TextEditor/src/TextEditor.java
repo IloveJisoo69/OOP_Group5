@@ -30,77 +30,19 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
         initComponents();
              
         this.setTitle("Group 5: Text Editor");
-        jTextPane1.setMargin(new Insets(10,10,10,10));
-        
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>());
-        jComboBox1.setEditable(true);
-        jComboBox1.addItem("6");
-        jComboBox1.addItem("7");
-        jComboBox1.addItem("8");
-        jComboBox1.addItem("9");
-        jComboBox1.addItem("10");
-        jComboBox1.addItem("10.5");
-        jComboBox1.addItem("11");
-        jComboBox1.addItem("12");
-        jComboBox1.addItem("13");
-        jComboBox1.addItem("14");
-        jComboBox1.addItem("15");
-        jComboBox1.addItem("16");
-        jComboBox1.addItem("18");
-        jComboBox1.addItem("20");
-        jComboBox1.addItem("22");
-        jComboBox1.addItem("24");
-        jComboBox1.addItem("26");
-        jComboBox1.addItem("28");
-        jComboBox1.addItem("32");
-        jComboBox1.addItem("36");
-        jComboBox1.addItem("40");
-        jComboBox1.addItem("44");
-        jComboBox1.addItem("48");
-        jComboBox1.addItem("54");
-        jComboBox1.addItem("60");
-        jComboBox1.addItem("66");
-        jComboBox1.addItem("72");
+        jTextPane1.setMargin(new Insets(10,10,10,10));   
         
         String[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(fonts));
         jComboBox2.setSelectedItem("Times New Roman");
-     
-        jComboBox1.addItemListener(new FontSizeChange());
         jComboBox2.addItemListener(new FontFamilyChange());  
         
-        jComboBox3.removeItem("Item 1");
-        jComboBox3.removeItem("Item 2");
-        jComboBox3.removeItem("Item 3");
-        jComboBox3.removeItem("Item 4");
-        jComboBox3.addItem("Align Text");
-        jComboBox3.addItem("Left Align");
-        jComboBox3.addItem("Center");
-        jComboBox3.addItem("Right Align");
-        jComboBox3.addItem("Justify");
-        jComboBox3.setEditable(false);
-    }
-    
-    public javax.swing.JComboBox getComboBox1() {
-        return jComboBox1;
-    }
-    
-    public javax.swing.JComboBox getComboBox2() {
-        return jComboBox2;
-    }
-    
-    public javax.swing.JTextPane getTextPane() {
-        return jTextPane1;
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Text Align", "Left Align", "Center Align", "Right Align", "Justify" }));;
     }
     
     @Override
     public void actionPerformed(ActionEvent evt) {
-        Action font = new FontAndSizeAction();
-        if (evt.getSource().equals(jComboBox1)) {
-            font.actionPerformed(evt);
-        } else if (evt.getSource().equals(jComboBox2)) {
-            font.actionPerformed(evt);
-        }
+        //
     }
     
     @Override
@@ -181,14 +123,12 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
         jSeparator1 = new javax.swing.JSeparator();
         jCheckBox1 = new javax.swing.JCheckBox();
         jComboBox2 = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jComboBox3 = new javax.swing.JComboBox<>();
@@ -223,9 +163,6 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
         jComboBox2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel1.setText("Font size: ");
-
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel2.setText("Font:");
 
@@ -252,9 +189,7 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jButton4.setText("FontChange");
+        jButton4.setText("Font Size");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -316,26 +251,22 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(68, Short.MAX_VALUE))
             .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
@@ -344,14 +275,12 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
                 .addGap(0, 16, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jButton3)
                     .addComponent(jButton4)
                     .addComponent(jButton5)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -447,10 +376,8 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -472,28 +399,28 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
     private javax.swing.JMenuItem saveFile;
     // End of variables declaration//GEN-END:variables
 
-    public class FontSizeChange implements ItemListener {
-        @Override
-        public void itemStateChanged(ItemEvent e) {
-
-            if ((e.getStateChange() != ItemEvent.SELECTED)) {
-                    return;
-            }
-            String fontSizeStr = (String) e.getItem();			
-            int newFontSize = 0;
-            try {
-                newFontSize = Integer.parseInt(fontSizeStr);
-            }
-            catch (NumberFormatException ex) {
-                return;
-            }
-            System.out.println(fontSizeStr);
-            System.out.println(newFontSize);
-            jComboBox1.setAction(new FontSizeAction(fontSizeStr, newFontSize));	
-            //jComboBox1.setSelectedIndex(0); // initialize to (default) select
-            jTextPane1.requestFocusInWindow();
-        }
-    } 
+//    public class FontSizeChange implements ItemListener {
+//        @Override
+//        public void itemStateChanged(ItemEvent e) {
+//
+//            if ((e.getStateChange() != ItemEvent.SELECTED)) {
+//                return;
+//            }
+//            String fontSizeStr = (String) e.getItem();			
+//            int newFontSize = 0;
+//            try {
+//                newFontSize = Integer.parseInt(fontSizeStr);
+//            }
+//            catch (NumberFormatException ex) {
+//                return;
+//            }
+//            System.out.println(fontSizeStr);
+//            System.out.println(newFontSize);
+//            jComboBox1.setAction(new FontSizeAction(fontSizeStr, newFontSize));	
+//            //jComboBox1.setSelectedIndex(0); // initialize to (default) select
+//            jTextPane1.requestFocusInWindow();
+//        }
+//    } 
 
     private class FontFamilyChange implements ItemListener {
         @Override
@@ -502,9 +429,7 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
                     return;
             }
             font.setFontFamily((String) e.getItem());
-            //System.out.println();
             jComboBox2.setAction(new FontFamilyAction(font.getFontFamily(), font.getFontFamily()));	
-            //jComboBox2.setSelectedIndex(0); // initialize to (default) select
             jTextPane1.requestFocusInWindow();
         }
     }

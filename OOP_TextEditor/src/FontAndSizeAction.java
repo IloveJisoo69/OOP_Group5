@@ -32,7 +32,6 @@ import javax.swing.text.StyledEditorKit;
  */
 public class FontAndSizeAction extends StyledEditorKit.StyledTextAction {
     private boolean accept = false;
-    private TextEditor option; 
     private final Font fonts = new Font();
     JDialog formatText;
     JComboBox fontFamilyChooser;
@@ -65,30 +64,24 @@ public class FontAndSizeAction extends StyledEditorKit.StyledTextAction {
         JPanel choosers = new JPanel();
         choosers.setLayout(new GridLayout(2, 1));
 
-        JPanel fontFamilyPanel = new JPanel();
-        fontFamilyPanel.add(new JLabel("Font"));
-
-        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        String[] fontNames = ge.getAvailableFontFamilyNames();
-
-        fontFamilyChooser = new JComboBox();
-        for (int i = 0; i < fontNames.length; i++) {
-            fontFamilyChooser.addItem(fontNames[i]);
-        }
-        fontFamilyChooser.setSelectedItem(fonts.getFontFamily());
-        fontFamilyPanel.add(fontFamilyChooser);
-        choosers.add(fontFamilyPanel);
-
         JPanel fontSizePanel = new JPanel();
         fontSizePanel.add(new JLabel("Size"));
         fontSizeChooser = new JComboBox();
-        fontSizeChooser.setEditable(true);
+        fontSizeChooser.setEditable(false);
         fontSizeChooser.addItem(4);
         fontSizeChooser.addItem(8);
         fontSizeChooser.addItem(12);
         fontSizeChooser.addItem(16);
         fontSizeChooser.addItem(20);
         fontSizeChooser.addItem(24);
+        fontSizeChooser.addItem(28);
+        fontSizeChooser.addItem(32);
+        fontSizeChooser.addItem(36);
+        fontSizeChooser.addItem(40);
+        fontSizeChooser.addItem(46);
+        fontSizeChooser.addItem(54);
+        fontSizeChooser.addItem(60);
+        fontSizeChooser.addItem(72);
         fontSizeChooser.setSelectedItem(new Float(fonts.getFontSize()));
         fontSizePanel.add(fontSizeChooser);
         choosers.add(fontSizePanel);
@@ -98,7 +91,6 @@ public class FontAndSizeAction extends StyledEditorKit.StyledTextAction {
             public void actionPerformed(ActionEvent ae) {
                 accept = true;
                 formatText.dispose();
-                fonts.setFontFamily((String) fontFamilyChooser.getSelectedItem());
                 fonts.setFontSize(Integer.parseInt(fontSizeChooser.getSelectedItem().toString()));
             }
         });
@@ -121,11 +113,9 @@ public class FontAndSizeAction extends StyledEditorKit.StyledTextAction {
         MutableAttributeSet attr = null;
         if (editor != null && accept) {
             attr = new SimpleAttributeSet();
-            StyleConstants.setFontFamily(attr, fonts.getFontFamily());
             StyleConstants.setFontSize(attr, (int) fonts.getFontSize());
             setCharacterAttributes(editor, attr, false);
         }
-
     }   
     
     
