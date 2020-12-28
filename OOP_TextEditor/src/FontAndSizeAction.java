@@ -3,6 +3,8 @@ import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -31,7 +33,7 @@ import javax.swing.text.StyledEditorKit;
 public class FontAndSizeAction extends StyledEditorKit.StyledTextAction {
     private boolean accept = false;
     private TextEditor option; 
-    private Font fonts = new Font();
+    private final Font fonts = new Font();
     JDialog formatText;
     JComboBox fontFamilyChooser;
     JComboBox fontSizeChooser;
@@ -47,33 +49,6 @@ public class FontAndSizeAction extends StyledEditorKit.StyledTextAction {
     
     @Override
     public void actionPerformed(ActionEvent e) {
-//        JTextPane editor = (JTextPane) getEditor(e);
-//        System.out.print(editor);
-//        int p0 = editor.getSelectionStart();
-//        StyledDocument doc = getStyledDocument(editor);
-//        Element paragraph = doc.getCharacterElement(p0);
-//        AttributeSet as = paragraph.getAttributes();
-//        
-//        fonts.setFontFamily(StyleConstants.getFontFamily(as));
-//        fonts.setFontSize(StyleConstants.getFontSize(as));
-//        
-//        if (e.getSource().equals(option.getComboBox1())) {
-//            accept = true;
-//            fonts.setFontSize((option.getComboBox1().getSelectedItem()));
-//        } else if (e.getSource().equals(option.getComboBox2())) {
-//            accept = true;
-//            fonts.setFontFamily((option.getComboBox2().getSelectedItem()));
-//        }
-//
-//        MutableAttributeSet attr = null;
-//        if (editor != null && accept) {
-//            attr = new SimpleAttributeSet();
-//            StyleConstants.setFontFamily(attr, fonts.getFontFamily());
-//            StyleConstants.setFontSize(attr, fonts.getFontSize());
-//            setCharacterAttributes(editor, attr, false);
-//        }
-
-
         JTextPane editor = (JTextPane) getEditor(e);
         System.out.println(editor);
         int p0 = editor.getSelectionStart();
@@ -98,7 +73,7 @@ public class FontAndSizeAction extends StyledEditorKit.StyledTextAction {
 
         fontFamilyChooser = new JComboBox();
         for (int i = 0; i < fontNames.length; i++) {
-          fontFamilyChooser.addItem(fontNames[i]);
+            fontFamilyChooser.addItem(fontNames[i]);
         }
         fontFamilyChooser.setSelectedItem(fonts.getFontFamily());
         fontFamilyPanel.add(fontFamilyChooser);
@@ -120,19 +95,19 @@ public class FontAndSizeAction extends StyledEditorKit.StyledTextAction {
 
         JButton ok = new JButton("OK");
         ok.addActionListener(new ActionListener() {
-          public void actionPerformed(ActionEvent ae) {
-            accept = true;
-            formatText.dispose();
-            fonts.setFontFamily((String) fontFamilyChooser.getSelectedItem());
-            fonts.setFontSize(Integer.parseInt(fontSizeChooser.getSelectedItem().toString()));
-          }
+            public void actionPerformed(ActionEvent ae) {
+                accept = true;
+                formatText.dispose();
+                fonts.setFontFamily((String) fontFamilyChooser.getSelectedItem());
+                fonts.setFontSize(Integer.parseInt(fontSizeChooser.getSelectedItem().toString()));
+            }
         });
 
         JButton cancel = new JButton("Cancel");
         cancel.addActionListener(new ActionListener() {
-          public void actionPerformed(ActionEvent ae) {
-            formatText.dispose();
-          }
+            public void actionPerformed(ActionEvent ae) {
+                formatText.dispose();
+            }
         });
 
         JPanel buttons = new JPanel();
@@ -145,11 +120,14 @@ public class FontAndSizeAction extends StyledEditorKit.StyledTextAction {
 
         MutableAttributeSet attr = null;
         if (editor != null && accept) {
-          attr = new SimpleAttributeSet();
-          StyleConstants.setFontFamily(attr, fonts.getFontFamily());
-          StyleConstants.setFontSize(attr, (int) fonts.getFontSize());
-          setCharacterAttributes(editor, attr, false);
+            attr = new SimpleAttributeSet();
+            StyleConstants.setFontFamily(attr, fonts.getFontFamily());
+            StyleConstants.setFontSize(attr, (int) fonts.getFontSize());
+            setCharacterAttributes(editor, attr, false);
         }
 
     }   
+    
+    
+    
 }

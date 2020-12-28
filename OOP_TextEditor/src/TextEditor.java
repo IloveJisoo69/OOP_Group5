@@ -8,6 +8,8 @@ import java.io.PrintWriter;
 import javax.swing.Action;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.*;
+import javax.swing.text.StyledEditorKit.*;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -20,6 +22,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author liams
  */
 public class TextEditor extends javax.swing.JFrame implements ActionListener,Menu {
+    private Font font = new Font();
     /**
      * Creates new form NewJFrame
      */
@@ -31,40 +34,40 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
         
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>());
         jComboBox1.setEditable(true);
-        jComboBox1.addItem(6);
-        jComboBox1.addItem(7);
-        jComboBox1.addItem(8);
-        jComboBox1.addItem(9);
-        jComboBox1.addItem(10);
-        jComboBox1.addItem(10.5);
-        jComboBox1.addItem(11);
-        jComboBox1.addItem(12);
-        jComboBox1.addItem(13);
-        jComboBox1.addItem(14);
-        jComboBox1.addItem(15);
-        jComboBox1.addItem(16);
-        jComboBox1.addItem(18);
-        jComboBox1.addItem(20);
-        jComboBox1.addItem(22);
-        jComboBox1.addItem(24);
-        jComboBox1.addItem(26);
-        jComboBox1.addItem(28);
-        jComboBox1.addItem(32);
-        jComboBox1.addItem(36);
-        jComboBox1.addItem(40);
-        jComboBox1.addItem(44);
-        jComboBox1.addItem(48);
-        jComboBox1.addItem(54);
-        jComboBox1.addItem(60);
-        jComboBox1.addItem(66);
-        jComboBox1.addItem(72);
+        jComboBox1.addItem("6");
+        jComboBox1.addItem("7");
+        jComboBox1.addItem("8");
+        jComboBox1.addItem("9");
+        jComboBox1.addItem("10");
+        jComboBox1.addItem("10.5");
+        jComboBox1.addItem("11");
+        jComboBox1.addItem("12");
+        jComboBox1.addItem("13");
+        jComboBox1.addItem("14");
+        jComboBox1.addItem("15");
+        jComboBox1.addItem("16");
+        jComboBox1.addItem("18");
+        jComboBox1.addItem("20");
+        jComboBox1.addItem("22");
+        jComboBox1.addItem("24");
+        jComboBox1.addItem("26");
+        jComboBox1.addItem("28");
+        jComboBox1.addItem("32");
+        jComboBox1.addItem("36");
+        jComboBox1.addItem("40");
+        jComboBox1.addItem("44");
+        jComboBox1.addItem("48");
+        jComboBox1.addItem("54");
+        jComboBox1.addItem("60");
+        jComboBox1.addItem("66");
+        jComboBox1.addItem("72");
         
         String[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(fonts));
         jComboBox2.setSelectedItem("Times New Roman");
      
-        jComboBox1.addActionListener(this);
-        jComboBox2.addActionListener(this);  
+        jComboBox1.addItemListener(new FontSizeChange());
+        jComboBox2.addItemListener(new FontFamilyChange());  
     }
     
     public javax.swing.JComboBox getComboBox1() {
@@ -441,4 +444,43 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
     private javax.swing.JMenuItem openFile;
     private javax.swing.JMenuItem saveFile;
     // End of variables declaration//GEN-END:variables
+
+    public class FontSizeChange implements ItemListener {
+        @Override
+        public void itemStateChanged(ItemEvent e) {
+
+            if ((e.getStateChange() != ItemEvent.SELECTED)) {
+                    return;
+            }
+            String fontSizeStr = (String) e.getItem();			
+            int newFontSize = 0;
+            try {
+                newFontSize = Integer.parseInt(fontSizeStr);
+            }
+            catch (NumberFormatException ex) {
+                return;
+            }
+            System.out.println(fontSizeStr);
+            System.out.println(newFontSize);
+            jComboBox1.setAction(new FontSizeAction(fontSizeStr, newFontSize));	
+            //jComboBox1.setSelectedIndex(0); // initialize to (default) select
+            jTextPane1.requestFocusInWindow();
+        }
+    } 
+
+    private class FontFamilyChange implements ItemListener {
+        @Override
+        public void itemStateChanged(ItemEvent e) {
+            if ((e.getStateChange() != ItemEvent.SELECTED)) {
+                    return;
+            }
+            font.setFontFamily((String) e.getItem());
+            //System.out.println();
+            jComboBox2.setAction(new FontFamilyAction(font.getFontFamily(), font.getFontFamily()));	
+            //jComboBox2.setSelectedIndex(0); // initialize to (default) select
+            jTextPane1.requestFocusInWindow();
+        }
+    }
+    
 }
+

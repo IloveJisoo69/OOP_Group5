@@ -16,6 +16,7 @@ import javax.swing.text.StyledEditorKit;
  * @author Ignacio
  */
 public class ItalicAction extends StyledEditorKit.StyledTextAction {
+    
     public ItalicAction() {
         super("font-italic");
     }
@@ -27,7 +28,6 @@ public class ItalicAction extends StyledEditorKit.StyledTextAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.print(e);
         JEditorPane editor = getEditor(e);
         if (editor != null) {
             StyledEditorKit kit = getStyledEditorKit(editor);
