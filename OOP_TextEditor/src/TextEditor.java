@@ -1,5 +1,4 @@
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.Insets;
 import java.awt.event.*;
@@ -10,8 +9,6 @@ import java.io.PrintWriter;
 import javax.swing.Action;
 import javax.swing.JColorChooser;
 import javax.swing.JFileChooser;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /*
@@ -149,14 +146,6 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
         System.exit(0);
     }
     
-    @Override
-    public void chooseFontColor(javax.swing.JTextPane textArea, javax.swing.JButton fontColorButton){
-        JColorChooser colorChooser = new JColorChooser();
-
-        Color color = colorChooser.showDialog(null, "Choose a color", Color.black);
-
-        textArea.setForeground(color);
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -351,7 +340,8 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
     }//GEN-LAST:event_saveFileActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        chooseFontColor(jTextPane1, jButton1);
+        Action fontColor = new FontColorAction();
+        fontColor.actionPerformed(evt);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

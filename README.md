@@ -1,2 +1,1 @@
-and I OOP Group 5
-This repository will contain all files needed for our game project
+This repository will contain all files needed for our text editor project
