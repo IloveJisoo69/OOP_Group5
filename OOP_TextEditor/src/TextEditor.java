@@ -68,6 +68,17 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
      
         jComboBox1.addItemListener(new FontSizeChange());
         jComboBox2.addItemListener(new FontFamilyChange());  
+        
+        jComboBox3.removeItem("Item 1");
+        jComboBox3.removeItem("Item 2");
+        jComboBox3.removeItem("Item 3");
+        jComboBox3.removeItem("Item 4");
+        jComboBox3.addItem("Align Text");
+        jComboBox3.addItem("Left Align");
+        jComboBox3.addItem("Center");
+        jComboBox3.addItem("Right Align");
+        jComboBox3.addItem("Justify");
+        jComboBox3.setEditable(false);
     }
     
     public javax.swing.JComboBox getComboBox1() {
@@ -180,6 +191,7 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
         jComboBox1 = new javax.swing.JComboBox();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jComboBox3 = new javax.swing.JComboBox<>();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         openFile = new javax.swing.JMenuItem();
@@ -256,6 +268,13 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
             }
         });
 
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox3ActionPerformed(evt);
+            }
+        });
+
         jMenuBar2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jMenuBar2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
@@ -314,7 +333,9 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
@@ -330,7 +351,8 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
                     .addComponent(jButton3)
                     .addComponent(jButton4)
                     .addComponent(jButton5)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -374,6 +396,10 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
         Action underlineAction = new UnderlineAction();
         underlineAction.actionPerformed(evt);
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+        jComboBox3.addItemListener(new AlignAction(jComboBox3));
+    }//GEN-LAST:event_jComboBox3ActionPerformed
     
     /**
      * @param args the command line arguments
@@ -423,6 +449,7 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
