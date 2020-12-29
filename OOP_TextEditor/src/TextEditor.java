@@ -8,8 +8,6 @@ import java.io.PrintWriter;
 import javax.swing.Action;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.text.*;
-import javax.swing.text.StyledEditorKit.*;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -177,6 +175,9 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
             }
         });
 
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        jTextPane1.setMaximumSize(new java.awt.Dimension(100, 500));
         jScrollPane1.setViewportView(jTextPane1);
 
         jButton2.setText("Bold");
@@ -406,18 +407,6 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
     private javax.swing.JMenuItem openFile;
     private javax.swing.JMenuItem saveFile;
     // End of variables declaration//GEN-END:variables
-
-    private class FontFamilyChange implements ItemListener {
-        @Override
-        public void itemStateChanged(ItemEvent e) {
-            if ((e.getStateChange() != ItemEvent.SELECTED)) {
-                    return;
-            }
-            font.setFontFamily((String) e.getItem());
-            jComboBox2.setAction(new FontFamilyAction(font.getFontFamily(), font.getFontFamily()));	
-            jTextPane1.requestFocusInWindow();
-        }
-    }
-    
+   
 }
 
