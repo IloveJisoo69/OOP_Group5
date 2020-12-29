@@ -1,1 +1,2 @@
-This repository will contain all files needed for our text editor project
+To run the textEditor, simply open the project in Netbeans and run it.
+
