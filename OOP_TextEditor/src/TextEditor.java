@@ -54,15 +54,11 @@ public class TextEditor extends Menu implements ActionListener {
     public void openItem(JTextPane editor__){
         StyledDocument doc = null;
 	
-        if (file__ == null) {
-		
-		file__ = chooseFile();
-			
-		if (file__ == null) {
-			
-			return;
-		}
+        file__ = chooseFile();
+	if (file__ == null) {
+            return;
 	}
+	
         
 	try (InputStream fis = new FileInputStream(file__);
 			ObjectInputStream ois = new ObjectInputStream(fis)) {
