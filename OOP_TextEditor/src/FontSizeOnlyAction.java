@@ -34,7 +34,6 @@ public class FontSizeOnlyAction extends StyledEditorKit.StyledTextAction {
     private boolean accept = false;
     private final Font fonts = new Font();
     JDialog formatText;
-    JComboBox fontFamilyChooser;
     JComboBox fontSizeChooser;
     
     public FontSizeOnlyAction() {

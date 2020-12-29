@@ -105,7 +105,7 @@ public class FontColorAction extends StyledEditorKit.StyledTextAction{
             setCharacterAttributes(editor, attr, false);
             }
           }
-        }// end if color != null
+        }
         noChange = false;
         cancelled = false;
     }

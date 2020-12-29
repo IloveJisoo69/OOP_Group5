@@ -191,7 +191,7 @@ public class TextEditor extends Menu implements ActionListener {
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                FontFamilyAction(evt);
             }
         });
 
@@ -201,7 +201,7 @@ public class TextEditor extends Menu implements ActionListener {
         jButton1.setText("Font Color");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                FontColorAction(evt);
             }
         });
 
@@ -213,42 +213,42 @@ public class TextEditor extends Menu implements ActionListener {
         jButton2.setText("Bold");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                BoldAction(evt);
             }
         });
 
         jButton3.setText("Italicize");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                ItalicAction(evt);
             }
         });
 
         jButton4.setText("Font Size");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                FontSizeAction(evt);
             }
         });
 
         jButton5.setText("Underline");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                UnderlineAction(evt);
             }
         });
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox3ActionPerformed(evt);
+                AlignAction(evt);
             }
         });
 
         jButton7.setText("Picture Insert");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                PictureAction(evt);
             }
         });
 
@@ -351,42 +351,42 @@ public class TextEditor extends Menu implements ActionListener {
         saveItem(jTextPane1);
     }//GEN-LAST:event_saveFileActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void FontColorAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FontColorAction
         Action fontColor = new FontColorAction();
         fontColor.actionPerformed(evt);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_FontColorAction
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void BoldAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoldAction
         Action boldAction = new BoldAction();
         boldAction.actionPerformed(evt);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_BoldAction
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void ItalicAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItalicAction
         Action italicAction = new ItalicAction();
         italicAction.actionPerformed(evt);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_ItalicAction
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void FontSizeAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FontSizeAction
         Action font = new FontSizeOnlyAction();
         font.actionPerformed(evt);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_FontSizeAction
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void UnderlineAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UnderlineAction
         Action underlineAction = new UnderlineAction();
         underlineAction.actionPerformed(evt);
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_UnderlineAction
 
-    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+    private void AlignAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlignAction
         jComboBox3.addItemListener(new AlignAction(jComboBox3));
-    }//GEN-LAST:event_jComboBox3ActionPerformed
+    }//GEN-LAST:event_AlignAction
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void PictureAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PictureAction
         jButton7.addActionListener(new PictureAction(jTextPane1, this));
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_PictureAction
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void FontFamilyAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FontFamilyAction
         jComboBox2.addItemListener(new FontFamilyOnlyAction(font,jComboBox2,jTextPane1));
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    }//GEN-LAST:event_FontFamilyAction
 
     
     /**
