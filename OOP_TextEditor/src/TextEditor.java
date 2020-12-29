@@ -7,9 +7,13 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import javax.swing.Action;
 import javax.swing.JFileChooser;
+import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.*;
 import javax.swing.text.StyledEditorKit.*;
+import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
+import java.awt.BorderLayout;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -30,14 +34,14 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
         initComponents();
              
         this.setTitle("Group 5: Text Editor");
-        jTextPane1.setMargin(new Insets(10,10,10,10));   
+        jTextPane1.setMargin(new Insets(10,10,10,10)); 
         
         String[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(fonts));
         jComboBox2.setSelectedItem("Times New Roman");
         jComboBox2.addItemListener(new FontFamilyChange());  
         
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Text Align", "Left Align", "Center Align", "Right Align", "Justify" }));;
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Text Align", "Left Align", "Center Align", "Right Align", "Justify" }));
     }
     
     @Override
