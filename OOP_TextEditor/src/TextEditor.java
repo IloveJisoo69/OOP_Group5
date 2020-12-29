@@ -2,12 +2,20 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Insets;
 import java.awt.event.*;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import javax.swing.Action;
 import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.JOptionPane;
+import javax.swing.JTextPane;
+import javax.swing.text.DefaultStyledDocument;
+import javax.swing.text.StyledDocument;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -19,7 +27,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author liams
  */
-public class TextEditor extends javax.swing.JFrame implements ActionListener,Menu {
+public class TextEditor extends Menu implements ActionListener {
     private Font font = new Font();
     /**
      * Creates new form NewJFrame
@@ -43,54 +51,73 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
     }
     
     @Override
-    public void openItem(javax.swing.JTextPane textArea){
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setCurrentDirectory(new File("."));
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Text files", "txt");
-        fileChooser.setFileFilter(filter);
+    public void openItem(JTextPane editor__){
+        StyledDocument doc = null;
+	
+        if (file__ == null) {
+		
+		file__ = chooseFile();
+			
+		if (file__ == null) {
+			
+			return;
+		}
+	}
         
-        int response = fileChooser.showOpenDialog(null);
+	try (InputStream fis = new FileInputStream(file__);
+			ObjectInputStream ois = new ObjectInputStream(fis)) {
+	
+		doc = (DefaultStyledDocument) ois.readObject();
+	}
+	catch (FileNotFoundException ex) {
 
-        if(response == JFileChooser.APPROVE_OPTION) {
-            File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
-
-            try {
-                FileReader fr = new FileReader(file);
-                while(fr.read() != -1){
-                    textArea.read(fr, null);
-                }
-                fr.close();
-            } catch (Exception e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
-        }
+		JOptionPane.showMessageDialog(frame__, "Input file was not found!");
+		return;
+	}
+	catch (ClassNotFoundException | IOException ex) {
+		throw new RuntimeException(ex);
+	}
+			
+	editor__.setDocument(doc);
     }
     
     @Override
-    public void saveItem(javax.swing.JTextPane textArea){
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setCurrentDirectory(new File("."));
-        int response = fileChooser.showSaveDialog(null);
+    public void saveItem(JTextPane editor__){
+        file__ = chooseFile();
+			
+        if (file__ == null) {
+			
+            return;
+	}
+	
+			
+	DefaultStyledDocument doc = (DefaultStyledDocument) editor__.getDocument();
+			
+	try (OutputStream fos = new FileOutputStream(file__);
+			ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+				
+		oos.writeObject(doc);
+	}
+	catch (IOException ex) {
 
-        if(response == JFileChooser.APPROVE_OPTION) {
-            File file;
-            PrintWriter fileOut = null;
-
-            file = new File(fileChooser.getSelectedFile().getAbsolutePath());
-            try {
-                fileOut = new PrintWriter(file);
-                fileOut.println(textArea.getText());
-            } 
-            catch (FileNotFoundException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
-            finally {
-                fileOut.close();
-            }   
-        }
+		throw new RuntimeException(ex);
+	}
+			
+	frame__.setTitle("Group 5: Text Editor" + file__.getName());
     }
+    
+    @Override
+    public  File chooseFile() {
+	JFileChooser chooser = new JFileChooser();
+			
+	if (chooser.showSaveDialog(frame__) == JFileChooser.APPROVE_OPTION) {
+
+		return chooser.getSelectedFile();
+	}
+	else {
+		return null;
+	}
+    };
     
     @Override
     public void exitItem(){
