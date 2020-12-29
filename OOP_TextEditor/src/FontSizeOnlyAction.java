@@ -30,14 +30,14 @@ import javax.swing.text.StyledEditorKit;
  *
  * @author Ignacio
  */
-public class FontAndSizeAction extends StyledEditorKit.StyledTextAction {
+public class FontSizeOnlyAction extends StyledEditorKit.StyledTextAction {
     private boolean accept = false;
     private final Font fonts = new Font();
     JDialog formatText;
     JComboBox fontFamilyChooser;
     JComboBox fontSizeChooser;
     
-    public FontAndSizeAction() {
+    public FontSizeOnlyAction() {
         super("Font and Size");
     }
     
@@ -49,7 +49,6 @@ public class FontAndSizeAction extends StyledEditorKit.StyledTextAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         JTextPane editor = (JTextPane) getEditor(e);
-        System.out.println(editor);
         int p0 = editor.getSelectionStart();
         StyledDocument doc = getStyledDocument(editor);
         Element paragraph = doc.getCharacterElement(p0);
