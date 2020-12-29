@@ -33,7 +33,6 @@ public class AlignAction implements ItemListener {
 	int newAlignment = jComboBox3.getSelectedIndex() - 1;
 	// New alignment is set based on these values defined in StyleConstants:
 	// ALIGN_LEFT 0, ALIGN_CENTER 1, ALIGN_RIGHT 2, ALIGN_JUSTIFIED 3
-	jComboBox3.setAction(new AlignmentAction(alignmentStr, newAlignment));	
-	jComboBox3.setSelectedIndex(0); // initialize to (default) select
+	jComboBox3.setAction(new AlignmentAction(alignmentStr, newAlignment));
     }
 }

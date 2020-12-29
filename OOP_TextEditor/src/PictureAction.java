@@ -21,7 +21,7 @@ import java.awt.event.ActionListener;
  *
  * @author liams
  */
-public class PictureAction implements ActionListener{
+public class PictureAction extends ImageResizer implements ActionListener{
     JTextPane editor__;
     JFrame frame__;
     
@@ -31,40 +31,36 @@ public class PictureAction implements ActionListener{
     }
     
     @Override
-		public void actionPerformed(ActionEvent e) {
-			
-			File pictureFile = choosePictureFile();
-			
-			if (pictureFile == null) {
-			
-				editor__.requestFocusInWindow();
-				return;
-			}
-			
-			ImageIcon icon = new ImageIcon(pictureFile.toString());			
-			JButton picButton = new JButton(icon);
-			picButton.setBorder(new LineBorder(Color.WHITE));
-			picButton.setMargin(new Insets(0,0,0,0));
-			picButton.setAlignmentY(.9f);
-			picButton.setAlignmentX(.9f);
-			picButton.setName("PICTURE_ID_" + new Random().nextInt());
-			editor__.insertComponent(picButton);
-			editor__.requestFocusInWindow();
-		}
+    public void actionPerformed(ActionEvent e) {
 		
-		private File choosePictureFile() {
+	File pictureFile = choosePictureFile();
+			
+	if (pictureFile == null) {
+		editor__.requestFocusInWindow();
+		return;
+	}
+			
+	ImageIcon icon = ImageResizer.resize(pictureFile);
+	JButton picButton = new JButton(icon);
+	picButton.setBorder(new LineBorder(Color.WHITE));
+	picButton.setMargin(new Insets(0,0,0,0));
+	picButton.setAlignmentY(.9f);
+	picButton.setAlignmentX(.9f);
+	picButton.setName("PICTURE_ID_" + new Random().nextInt());
+	editor__.insertComponent(picButton);
+	editor__.requestFocusInWindow();
+    }
 		
-			JFileChooser chooser = new JFileChooser();
-			FileNameExtensionFilter filter = new FileNameExtensionFilter(
-								"PNG, JPG & GIF Images", "png", "jpg", "gif");
-			chooser.setFileFilter(filter);
+    private File choosePictureFile() {
+	JFileChooser chooser = new JFileChooser();
+	FileNameExtensionFilter filter = new FileNameExtensionFilter("PNG, JPG & GIF Images", "png", "jpg", "gif");
+	chooser.setFileFilter(filter);
 			
-			if (chooser.showOpenDialog(frame__) == JFileChooser.APPROVE_OPTION) {
-			
-				return chooser.getSelectedFile();
-			}
-			else {
-				return null;
-			}
-		}
+	if (chooser.showOpenDialog(frame__) == JFileChooser.APPROVE_OPTION) {
+		return chooser.getSelectedFile();
+	}
+	else {
+		return null;
+	}
+    }
 }
