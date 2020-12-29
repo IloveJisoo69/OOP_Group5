@@ -7,14 +7,8 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import javax.swing.Action;
 import javax.swing.JFileChooser;
-import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.text.*;
 import javax.swing.text.StyledEditorKit.*;
-import javax.swing.JScrollPane;
-import javax.swing.JTextPane;
-import java.awt.BorderLayout;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
