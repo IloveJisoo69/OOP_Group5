@@ -34,10 +34,9 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
         
         String[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(fonts));
-        jComboBox2.setSelectedItem("Times New Roman");
-        jComboBox2.addItemListener(new FontFamilyChange());  
+        jComboBox2.setSelectedItem("Times New Roman");  
         
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Text Align", "Left Align", "Center Align", "Right Align", "Justify" }));;
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Text Align", "Left Align", "Center Align", "Right Align", "Justify" }));
     }
     
     @Override
@@ -162,6 +161,11 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
 
         jComboBox2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel2.setText("Font:");
@@ -329,6 +333,10 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
         jComboBox3.addItemListener(new AlignAction(jComboBox3));
     }//GEN-LAST:event_jComboBox3ActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        jComboBox2.addItemListener(new FontFamilyOnlyAction(font,jComboBox2,jTextPane1));
+    }//GEN-LAST:event_jComboBox2ActionPerformed
     
     /**
      * @param args the command line arguments
@@ -398,29 +406,6 @@ public class TextEditor extends javax.swing.JFrame implements ActionListener,Men
     private javax.swing.JMenuItem openFile;
     private javax.swing.JMenuItem saveFile;
     // End of variables declaration//GEN-END:variables
-
-//    public class FontSizeChange implements ItemListener {
-//        @Override
-//        public void itemStateChanged(ItemEvent e) {
-//
-//            if ((e.getStateChange() != ItemEvent.SELECTED)) {
-//                return;
-//            }
-//            String fontSizeStr = (String) e.getItem();			
-//            int newFontSize = 0;
-//            try {
-//                newFontSize = Integer.parseInt(fontSizeStr);
-//            }
-//            catch (NumberFormatException ex) {
-//                return;
-//            }
-//            System.out.println(fontSizeStr);
-//            System.out.println(newFontSize);
-//            jComboBox1.setAction(new FontSizeAction(fontSizeStr, newFontSize));	
-//            //jComboBox1.setSelectedIndex(0); // initialize to (default) select
-//            jTextPane1.requestFocusInWindow();
-//        }
-//    } 
 
     private class FontFamilyChange implements ItemListener {
         @Override

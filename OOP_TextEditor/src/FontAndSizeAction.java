@@ -49,7 +49,6 @@ public class FontAndSizeAction extends StyledEditorKit.StyledTextAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         JTextPane editor = (JTextPane) getEditor(e);
-        System.out.println(editor);
         int p0 = editor.getSelectionStart();
         StyledDocument doc = getStyledDocument(editor);
         Element paragraph = doc.getCharacterElement(p0);
